@@ -1,0 +1,16 @@
+:root{
+    color-scheme:light dark;
+}
+
+@media(prefers-color-sheme:dark){
+    body{
+        background:#333;
+        color:white;
+    }
+}
+@media(prefers-color-sheme:light){
+    body{
+        background:#ddd;
+        color:black;
+    }
+}
