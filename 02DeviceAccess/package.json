@@ -1,0 +1,14 @@
+{
+  "name": "02DeviceAccess",
+  "version": "1.0.0",
+  "description": "device access",
+  "main": "main.js",
+  "author": "CodeGetters",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^25.2.0"
+  }
+}

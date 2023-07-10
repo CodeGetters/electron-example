@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-07-10 10:08:09
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-10 10:52:20
+ * @LastEditTime: 2023-07-10 12:04:33
  */
 const { app, BrowserWindow, ipcMain, nativeTheme } = require("electron");
 
