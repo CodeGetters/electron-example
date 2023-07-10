@@ -31,6 +31,8 @@ yarn make
 
 ### WebHID
 
+## 键盘快捷键
+
 ## 证书
 
 MIT

@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-07-10 11:05:24
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-10 14:27:38
+ * @LastEditTime: 2023-07-10 14:38:26
  */
 
 // 注意：测试这个用例需要先手动打开蓝牙，否则点击 Test Bluetooth 按钮将会报错
@@ -17,6 +17,8 @@ const path = require("path");
 let bluetoothPinCallback;
 
 let selectBluetoothCallback;
+
+app.commandLine.appendSwitch("disable-hid-blocklist");
 
 // 创建窗口
 const createWindow = () => {
@@ -111,6 +113,7 @@ const createWindow = () => {
       return true;
     }
   });
+  
   mainWin.loadFile("index.html");
 };
 
