@@ -17,7 +17,9 @@ export default defineConfig({
   },
   plugins: [
     vue(),
-    UnoCSS(),
+    UnoCSS({
+      configFile: "./uno.config.ts",
+    }),
     electron([
       {
         // Main-Process entry file of the Electron App.

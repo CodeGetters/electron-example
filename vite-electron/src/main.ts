@@ -5,10 +5,12 @@
  * @version:
  * @Date: 2023-07-10 19:35:31
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-10 20:48:21
+ * @LastEditTime: 2023-07-10 23:45:02
  */
 import { createApp } from "vue";
 import App from "./App.vue";
+
+import "virtual:uno.css";
 
 import router from "./router";
 
