@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-07-10 11:06:51
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-10 13:49:39
+ * @LastEditTime: 2023-07-10 14:22:00
  */
 
 // 选择蓝牙设备并将蓝牙设备渲染在页面上
@@ -67,3 +67,28 @@ window.electronAPI.bluetoothPairingRequest((event, details) => {
   // 将用户的响应发送回主进程
   window.electronAPI.bluetoothPairingResponse(response);
 });
+
+const testIt2 = async () => {
+  console.log("renderer process: WebHID testIt2");
+
+  const grantedDevices = await navigator.hid.getDevices();
+  let grantedDeviceList = "";
+
+  grantedDevices.forEach((device) => {
+    grantedDeviceList += `<hr>${device.productName}</hr>`;
+  });
+
+  document.getElementById("granted-devices").innerHTML = grantedDeviceList;
+  const grantedDevices2 = await navigator.hid.requestDevice({
+    filters: [],
+  });
+
+  grantedDeviceList = "";
+  grantedDevices2.forEach((device) => {
+    grantedDeviceList += `<hr>${device.productName}</hr>`;
+  });
+
+  document.getElementById("granted-devices2").innerHTML = grantedDeviceList;
+};
+
+document.getElementById("clickme").addEventListener("click", testIt2);

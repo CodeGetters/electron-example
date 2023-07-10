@@ -5,12 +5,12 @@
  * @version:
  * @Date: 2023-07-10 11:05:24
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-10 13:43:36
+ * @LastEditTime: 2023-07-10 14:27:38
  */
 
 // 注意：测试这个用例需要先手动打开蓝牙，否则点击 Test Bluetooth 按钮将会报错
 
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, webContents } = require("electron");
 
 const path = require("path");
 
@@ -77,6 +77,40 @@ const createWindow = () => {
     }
   );
 
+  // WebHID API
+  mainWin.webContents.session.on(
+    "select-hid-device",
+    (event, details, callback) => {
+      console.log("main process:WebHID API");
+
+      mainWin.webContents.session.on("hid-device-added", (event, device) => {
+        console.log("main process:hid-device-added FIRED WITH", device);
+      });
+
+      mainWin.webContents.session.on("hid-device-removed", (event, device) => {
+        console.log("main process:hid-device-removed FIRED WITH", device);
+      });
+
+      event.preventDefault();
+      if (details.deviceList && details.deviceList.length > 0) {
+        callback(details.deviceList[0].deviceId);
+      }
+    }
+  );
+
+  mainWin.webContents.session.setPermissionCheckHandler(
+    (webContents, permission, requestingOrigin, details) => {
+      if (permission === "hid" && details.securityOrigin === "file:///") {
+        return true;
+      }
+    }
+  );
+
+  mainWin.webContents.session.setDevicePermissionHandler((details) => {
+    if (details.deviceType === "hid" && details.origin === "file://") {
+      return true;
+    }
+  });
   mainWin.loadFile("index.html");
 };
 
