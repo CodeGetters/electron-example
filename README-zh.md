@@ -33,6 +33,8 @@ yarn make
 
 ## 键盘快捷键
 
+## [Vue + Electron](https://blog.csdn.net/qq_37460847/article/details/126918641)
+
 ## 证书
 
 MIT
