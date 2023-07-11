@@ -18,3 +18,7 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
 2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
 
 [unocss Icon](https://github.com/unocss/unocss/tree/main/examples/vite-vue3)
+
+```shell
+npx envinfo --system --npmPackages vue --binar
+```

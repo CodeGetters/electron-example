@@ -3,18 +3,19 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 4000",
     "build": "vue-tsc && vite build && electron-builder",
     "preview": "vite preview"
   },
   "main": "dist-electron/main.js",
   "devDependencies": {
-    "@iconify-json/uiw": "^1.1.7",
+    "@iconify-json/line-md": "^1.1.25",
     "@vitejs/plugin-vue": "^4.1.0",
     "electron": "^24.4.0",
     "electron-builder": "^23.6.0",
     "typescript": "^5.0.2",
     "unocss": "^0.53.5",
+    "unplugin-auto-import": "^0.16.6",
     "vite": "^4.3.2",
     "vite-plugin-electron": "^0.11.2",
     "vite-plugin-electron-renderer": "^0.14.5",
