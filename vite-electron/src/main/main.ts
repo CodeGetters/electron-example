@@ -57,34 +57,49 @@ const createWindow = () => {
   }
 };
 
-ipcMain.handle("post-data", async () => {
+ipcMain.handle("post-data", () => {
   console.log("main process: begin post");
 
-  const req = net.request({
-    method: "POST",
-    hostname: "127.0.0.1",
-    protocol: "http:",
-    port: 443,
-    path: "/user/login",
+  return new Promise((resolve, reject) => {
+    let resData = "";
+
+    const req = net.request({
+      method: "POST",
+      hostname: "127.0.0.1",
+      protocol: "http:",
+      port: 443,
+      path: "/user/login",
+    });
+
+    req.on("response", (res) => {
+      console.log(`main process :Status:${res.statusCode}`);
+
+      if (res.statusCode === 200) {
+        res.on("data", (chunk) => {
+          resData += chunk;
+        });
+
+        res.on("end", () => {
+          console.log("resData:::", resData);
+          resolve(resData);
+        });
+      } else {
+        reject(new Error(`请求失败，状态码：${res.statusCode}`));
+      }
+    });
+
+    const formData = new FormData();
+    formData.append("userName", "asdf");
+    formData.append("pwd", "asdf2");
+    const postData = formData.getBuffer();
+
+    req.setHeader(
+      "Content-Type",
+      `multipart/form-data; boundary=${formData.getBoundary()}`
+    );
+
+    req.write(postData);
+    req.end();
   });
-
-  req.on("response", (res) => {
-    console.log(`main process :Status:${res.statusCode}`);
-  });
-
-  const formData = new FormData();
-  formData.append("userName", "asdf");
-  formData.append("pwd", "asdf2");
-  const postData = formData.getBuffer();
-
-  req.setHeader(
-    "Content-Type",
-    `multipart/form-data; boundary=${formData.getBoundary()}`
-  );
-
-  req.write(postData);
-
-  req.end();
 });
-
 app.whenReady().then(createWindow);

@@ -5,7 +5,7 @@
  * @version:
  * @Date: 2023-07-10 19:35:31
  * @LastEditors: CodeGetters
- * @LastEditTime: 2023-07-11 15:36:59
+ * @LastEditTime: 2023-07-11 18:03:08
  */
 
 const { contextBridge, ipcRenderer } = require("electron");
@@ -107,11 +107,10 @@ setTimeout(removeLoading, 2999);
 
 // ----------------------------------------------------------------------
 
-
 // 使用 main-process-message 通道 将方法暴露给 renderer
 contextBridge.exposeInMainWorld("preMainAPI", {
-  postData: () => {
-    ipcRenderer.invoke("post-data");
-    return "start";
+  postData: async () => {
+    const data = await ipcRenderer.invoke("post-data");
+    return data;
   },
 });

@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import HeadImage from "../layout/HeadImage.vue";
+import { ref } from "vue";
 
+let data = ref(null);
 const getData = async () => {
-  const postData = await window.preMainAPI.postData();
-  console.log(postData);
+  data.value = await window.preMainAPI.postData();
 };
 </script>
 
@@ -44,7 +45,8 @@ const getData = async () => {
         </div>
       </div>
     </main>
-    <button @click="getData()">发送请求</button>
+    <button @click="getData">发送请求</button>
+    <div>{{ data }}</div>
   </div>
 </template>
 
